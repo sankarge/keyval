@@ -11,9 +11,8 @@ This project uses [Create React App](https://github.com/facebook/create-react-ap
 - npm start
 - npm install --save bootstrap
 - npm install --save reactstrap react react-dom
-
-## Import Bootstrap CSS in the src/index.js file:
-`import 'bootstrap/dist/css/bootstrap.min.css';`
+- Import Bootstrap CSS in the src/index.js file:
+  - import 'bootstrap/dist/css/bootstrap.min.css';
 
 ## Available Scripts
 In the project directory, you can run:
