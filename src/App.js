@@ -16,8 +16,8 @@ class App extends Component {
 	downloadFileFromS3(){
 		var s3 = new S3({
 			region: 'ap-south-1',
-		 	accessKeyId: 'AKIA3LH6UCIIJIALJN6U',
-		  	secretAccessKey : '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'
+		 	accessKeyId: '',
+		  	secretAccessKey : ''
 		});
 		var params = {
 			Bucket: "keyval", 
