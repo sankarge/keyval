@@ -2,19 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import S3 from 'aws-sdk/clients/s3';
 
 import React, {Component} from "react";
-import {
-    Card,
-    CardBody,
-    CardColumns,
-    CardHeader,
-    CardText,
-    Col,
-    Container,
-    Input,
-    InputGroup,
-    Row,
-    Table
-} from 'reactstrap';
+import {Card, CardBody, CardColumns, CardText, Col, Container, Input, InputGroup, Row, Table} from 'reactstrap';
 
 class App extends Component {
 
@@ -46,7 +34,6 @@ class App extends Component {
     }
 
     onInputUpdate(e) {
-        e.preventDefault();
         this.setFilter(e.target.value);
     }
 
@@ -106,12 +93,11 @@ class CardBuilder extends React.Component {
     render() {
         const rows = [];
         var item = this.props.item;
-        for (let row of Object.keys(item).slice(1)) {
+        for (let row of Object.keys(item)) {
             rows.push(<RowBuilder key1={row} value={item[row]}/>)
         }
         return (
             <Card>
-                <CardHeader><b>{Object.values(item)[0]}</b></CardHeader>
                 <CardBody>
                     <Container fluid>
                         {rows}
