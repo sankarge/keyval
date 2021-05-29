@@ -2,7 +2,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import S3 from 'aws-sdk/clients/s3';
 
 import React, {Component} from "react";
-import {Button, Card, CardBody, CardColumns, CardHeader, CardText, Col, Container, Input, InputGroup, Row, Table} from 'reactstrap';
+import {
+    Card,
+    CardBody,
+    CardColumns,
+    CardHeader,
+    CardText,
+    Col,
+    Container,
+    Input,
+    InputGroup,
+    Row,
+    Table
+} from 'reactstrap';
 
 class App extends Component {
 
@@ -12,7 +24,6 @@ class App extends Component {
         this.downloadFileFromS3();
         this.onInputUpdate = this.onInputUpdate.bind(this);
         this.setFilter = this.setFilter.bind(this);
-        this.onFilterApply = this.onFilterApply.bind(this);
     }
 
     downloadFileFromS3() {
@@ -43,14 +54,19 @@ class App extends Component {
         this.setState({'search': value});
     }
 
-    onFilterApply() {
-        console.log(this.state);
-    }
-
     render() {
         var cards = [];
         for (let item of this.state.keyval) {
-            cards.push(<CardBuilder item={item}/>);
+            if (this.state.search === '' || this.state.search === undefined) {
+                cards.push(<CardBuilder item={item}/>);
+            } else {
+                for (let row of Object.keys(item)) {
+                    if (row.includes(this.state.search) || item[row].includes(this.state.search)) {
+                        cards.push(<CardBuilder item={item}/>);
+                        break;
+                    }
+                }
+            }
         }
         return (
             <span>
@@ -63,9 +79,6 @@ class App extends Component {
 									<Input placeholder="search by anything!" onChange={this.onInputUpdate}>
 									</Input>
 								</InputGroup>
-							</td>
-							<td>
-								<Button onClick={this.onFilterApply}>Search</Button>
 							</td>
 						</tr>
 						</tbody>
@@ -118,7 +131,7 @@ class RowBuilder extends React.Component {
                     <CardText><b>{this.props.key1}</b></CardText>
                 </Col>
                 <Col>
-                    <CardText >{this.props.value}️</CardText>
+                    <CardText>{this.props.value}️</CardText>
                 </Col>
             </Row>
         )
